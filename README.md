@@ -1,0 +1,1 @@
+Öncelikle VsCode Uygulamasından "index.html" adlı bir html uzantısına ait bir dosya oluşturun sonra vermiş olduğum kodu index.html sayfasına yapıştırın sonra klavyenizden "f5" tuşuna basın orada chrome'i seçin sonra yapmış olduğum hesap makinesi gözükecektir.
