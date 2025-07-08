@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akıllı Hesap Makinesi</title>
+    <title>Hesap Makinesi</title>
     <!-- Tailwind CSS CDN'i -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,37 +20,16 @@
         .calculator-button:active {
             transform: scale(0.95);
         }
-        /* Yükleme animasyonu için stil */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 4px solid #3498db;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        /* Gizli elemanlar için stil */
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen">
 
     <!-- Hesap Makinesi Ana Konteyneri -->
-    <div class="w-full max-w-sm mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden relative">
+    <div class="w-full max-w-sm mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
         
         <!-- Ekran Bölümü -->
         <div class="p-6">
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-lg p-4 text-right text-4xl font-bold text-gray-800 dark:text-white break-words flex items-center justify-end">
-                <span id="display">0</span>
-                <!-- Gemini butonu için yer tutucu -->
-                <button id="gemini-button" class="hidden ml-2 text-2xl" title="Bu sayı hakkında bilgi al ✨">✨</button>
-            </div>
+            <div id="display" class="w-full bg-gray-200 dark:bg-gray-700 rounded-lg p-4 text-right text-4xl font-bold text-gray-800 dark:text-white break-words">0</div>
         </div>
 
         <!-- Tuş Takımı -->
@@ -88,38 +67,9 @@
         </div>
     </div>
 
-    <!-- Gemini Modal ve Yükleme Ekranı -->
-    <div id="modal-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div id="modal" class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-11/12 max-w-md">
-            <div id="modal-loading" class="flex flex-col items-center justify-center">
-                <div class="loader"></div>
-                <p class="mt-4 text-gray-600 dark:text-gray-300">✨ Bilgi getiriliyor...</p>
-            </div>
-            <div id="modal-content" class="hidden">
-                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Sayı Hakkında Bilgi</h3>
-                 <p id="gemini-response" class="text-gray-700 dark:text-gray-200"></p>
-                 <button onclick="closeModal()" class="mt-4 w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">Kapat</button>
-            </div>
-             <div id="modal-error" class="hidden">
-                 <h3 class="text-lg font-bold text-red-500 mb-2">Hata</h3>
-                 <p id="gemini-error-message" class="text-gray-700 dark:text-gray-200"></p>
-                 <button onclick="closeModal()" class="mt-4 w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Kapat</button>
-            </div>
-        </div>
-    </div>
-
-
     <script>
         // Gerekli DOM elemanlarını seçiyoruz
         const display = document.getElementById('display');
-        const geminiButton = document.getElementById('gemini-button');
-        const modalOverlay = document.getElementById('modal-overlay');
-        const modal = document.getElementById('modal');
-        const modalLoading = document.getElementById('modal-loading');
-        const modalContent = document.getElementById('modal-content');
-        const modalError = document.getElementById('modal-error');
-        const geminiResponse = document.getElementById('gemini-response');
-        const geminiErrorMessage = document.getElementById('gemini-error-message');
         
         // Değişkenleri tanımlıyoruz
         let currentInput = '0';
@@ -127,7 +77,6 @@
 
         // Ekrana karakter ekleyen fonksiyon
         function appendCharacter(char) {
-            hideGeminiButton();
             // Eğer ekran sıfırlanması gerekiyorsa veya mevcut giriş '0' ise, ekranı temizle
             if (shouldResetDisplay || (currentInput === '0' && char !== '.')) {
                 currentInput = '';
@@ -152,14 +101,12 @@
         function clearAll() {
             currentInput = '0';
             shouldResetDisplay = false;
-            hideGeminiButton();
             updateDisplay();
         }
 
         // Son girişi temizle (C) fonksiyonu
         function clearEntry() {
             currentInput = '0';
-            hideGeminiButton();
             updateDisplay();
         }
 
@@ -168,111 +115,24 @@
             if (currentInput === '' || shouldResetDisplay) return;
             
             try {
+                // Güvenlik notu: eval() fonksiyonu dikkatli kullanılmalıdır.
+                // Bu basit hesap makinesi için yeterlidir, ancak karmaşık uygulamalarda
+                // güvenlik açıklarına neden olabilir.
                 let expression = currentInput.replace(/%/g, '/100').replace(/×/g, '*').replace(/÷/g, '/');
                 let result = eval(expression);
                 
+                // Sonucu formatla (gereksiz ondalıkları kaldır)
                 result = parseFloat(result.toFixed(10));
 
                 display.textContent = result;
                 currentInput = result.toString();
                 shouldResetDisplay = true;
-                showGeminiButton();
             } catch (error) {
                 display.textContent = 'Hata';
                 currentInput = '0';
                 shouldResetDisplay = true;
-                hideGeminiButton();
             }
         }
-        
-        // Gemini butonunu göster
-        function showGeminiButton() {
-            geminiButton.classList.remove('hidden');
-        }
-
-        // Gemini butonunu gizle
-        function hideGeminiButton() {
-            geminiButton.classList.add('hidden');
-        }
-
-        // Gemini API'sini çağıran fonksiyon
-        async function getNumberFact() {
-            const number = currentInput;
-            if (!number || isNaN(number)) return;
-
-            openModal(true); // Yükleme ekranını göster
-
-            const prompt = `Lütfen ${number} sayısı hakkında kısa ve ilgi çekici bir matematiksel, bilimsel veya tarihsel bilgi ver. Cevabın sadece bu bilgiyi içersin, başka bir açıklama yapma.`;
-            
-            const apiKey = ""; // API anahtarı buraya eklenecek, boş bırakıldığında Canvas tarafından sağlanır.
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-            try {
-                const payload = {
-                    contents: [{ role: "user", parts: [{ text: prompt }] }]
-                };
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`API hatası: ${response.statusText}`);
-                }
-
-                const result = await response.json();
-                
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    geminiResponse.textContent = text;
-                    showModalContent();
-                } else {
-                    throw new Error("Geçerli bir yanıt alınamadı.");
-                }
-
-            } catch (error) {
-                console.error("Gemini API Hatası:", error);
-                geminiErrorMessage.textContent = `Bir hata oluştu: ${error.message}`;
-                showModalError();
-            }
-        }
-
-        // Modal'ı aç
-        function openModal(isLoading = false) {
-            modalOverlay.classList.remove('hidden');
-            if (isLoading) {
-                modalLoading.classList.remove('hidden');
-                modalContent.classList.add('hidden');
-                modalError.classList.add('hidden');
-            }
-        }
-
-        // Modal'ı kapat
-        function closeModal() {
-            modalOverlay.classList.add('hidden');
-        }
-
-        // Modal'da içeriği göster
-        function showModalContent() {
-            modalLoading.classList.add('hidden');
-            modalError.classList.add('hidden');
-            modalContent.classList.remove('hidden');
-        }
-
-        // Modal'da hatayı göster
-        function showModalError() {
-            modalLoading.classList.add('hidden');
-            modalContent.classList.add('hidden');
-            modalError.classList.remove('hidden');
-        }
-
-
-        // Olay dinleyicileri
-        geminiButton.addEventListener('click', getNumberFact);
 
         // Başlangıçta ekranı ayarla
         updateDisplay();
