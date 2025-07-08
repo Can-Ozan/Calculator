@@ -30,7 +30,7 @@ Projeyi kendi bilgisayarınızda çalıştırmak çok kolay!
 
 Projeyi Klonlayın:
 
-git clone https://github.com/kullanici-adiniz/hesap-makinesi-repo.git
+git clone https://github.com/Can-Ozan/hesap-makinesi-repo.git
 
 Dizine Gidin:
 
