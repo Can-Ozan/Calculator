@@ -1,55 +1,47 @@
-Modern Hesap Makinesi | HTML, CSS & JavaScript
-Bu proje, web teknolojilerinin temel taşları olan HTML, CSS (Tailwind CSS ile) ve vanilya JavaScript kullanılarak oluşturulmuş, şık ve tamamen işlevsel bir hesap makinesi uygulamasıdır. Sadece bir hesap makinesi değil, aynı zamanda temiz kod ve modern web tasarımı prensiplerinin bir vitrinidir.
+Modern Calculator | HTML, CSS & JavaScript
+This project is a sleek and fully functional calculator application built with the cornerstones of web technology: HTML, CSS (with Tailwind CSS), and vanilla JavaScript. It's not just a calculator, but a showcase of clean code and modern web design principles.
 
-✨ Öne Çıkan Özellikler
-Modern ve Şık Arayüz: Göz alıcı ve kullanıcı dostu bir tasarım.
+✨ Featured Features
+*   **Modern & Sleek Interface:** An eye-catching and user-friendly design.
+*   **Responsive Design:** Works flawlessly on all devices, including mobile, tablet, and desktop.
+*   **Dark Mode Support:** Automatically adapts to your operating system's theme.
+*   **All Basic Operations:** Includes functions for addition, subtraction, multiplication, division, and percentage.
+*   **Interactive Keys:** Provides instant feedback with satisfying animations when keys are pressed.
+*   **Zero Dependencies:** Runs on pure vanilla JavaScript without the need for external libraries.
+*   **Easy-to-Understand Code:** The code structure is simple and well-commented, making it easy for even beginners to understand.
 
-Duyarlı (Responsive) Tasarım: Mobil, tablet ve masaüstü dahil olmak üzere tüm cihazlarda kusursuz çalışır.
+🛠️ Technologies Used
+This project was brought to life using the following technologies:
+*   **HTML5:** For the basic structure and skeleton of the application.
+*   **Tailwind CSS:** A utility-first CSS framework for rapid and modern styling.
+*   **Vanilla JavaScript:** Pure JavaScript code that manages all the application's logic and functionality.
 
-Karanlık Mod Desteği: İşletim sisteminizin temasına otomatik olarak uyum sağlar.
+## 🖼️ Project Screenshots
 
-Tüm Temel İşlemler: Toplama, çıkarma, çarpma, bölme ve yüzde alma fonksiyonları.
+### Main Interface
+![SwiftNote Studio Interface](/images/arayüz.png)
 
-Etkileşimli Tuşlar: Tuşlara basıldığında tatmin edici animasyonlarla anında geri bildirim.
+🚀 Quick Start
+Getting the project running on your local machine is very easy!
 
-Sıfır Bağımlılık: Harici kütüphanelere ihtiyaç duymadan, sadece vanilya JavaScript ile çalışır.
+1.  **Clone the Project:**
+    ```bash
+    git clone https://github.com/Can-Ozan/Calculator-repo.git
+    ```
 
-Kolay Anlaşılır Kod: Kod yapısı, yeni başlayanların bile anlayabileceği şekilde basit ve yorum satırlarıyla zenginleştirilmiştir.
+2.  **Navigate to the Directory:**
+    ```bash
+    cd Calculator-repo
+    ```
 
-🛠️ Kullanılan Teknolojiler
-Bu proje aşağıdaki teknolojiler kullanılarak hayata geçirilmiştir:
+3.  **Open `index.html`:**
+    You can start using the application immediately by double-clicking the `index.html` file or opening it in your favorite browser. An internet connection is only required to fetch Tailwind CSS from the CDN.
 
-HTML5: Uygulamanın temel yapısı ve iskeleti.
+🤝 Contributing
+Your contributions will help take this project even further! I welcome your ideas, bug reports, or new feature requests.
 
-Tailwind CSS: Modern ve hızlı bir şekilde stil vermek için kullanılan bir CSS çatısı.
-
-Vanilya JavaScript: Uygulamanın tüm mantığını ve işlevselliğini yöneten saf JavaScript kodu.
-
-🚀 Hızlı Başlangıç
-Projeyi kendi bilgisayarınızda çalıştırmak çok kolay!
-
-Projeyi Klonlayın:
-
-git clone https://github.com/Can-Ozan/hesap-makinesi-repo.git
-
-Dizine Gidin:
-
-cd hesap-makinesi-repo
-
-index.html Dosyasını Açın:
-index.html dosyasına çift tıklayarak veya favori tarayıcınızda açarak uygulamayı anında kullanmaya başlayabilirsiniz. İnternet bağlantısı, sadece Tailwind CSS'in CDN üzerinden çekilmesi için gereklidir.
-
-🤝 Katkıda Bulunma
-Katkılarınız projeyi daha da ileriye taşıyacaktır! Fikirlerinizi, hata bildirimlerinizi veya yeni özellik taleplerinizi bekliyorum.
-
-Projeyi Fork'layın.
-
-Yeni bir Branch oluşturun (git checkout -b ozellik/yeni-bir-ozellik).
-
-Değişikliklerinizi Commit'leyin (git commit -m '✨ Yeni bir özellik eklendi').
-
-Oluşturduğunuz Branch'i Push'layın (git push origin ozellik/yeni-bir-ozellik).
-
-Bir Pull Request açın.
-
-Bu README'yi projenize ekleyerek daha profesyonel bir görünüm kazandırabilirsiniz. Başka bir konuda yardıma ihtiyacınız olursa çekinmeyin!
+1.  Fork the Project.
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
+4.  Push to the Branch (`git push origin feature/AmazingFeature`).
+5.  Open a Pull Request.
